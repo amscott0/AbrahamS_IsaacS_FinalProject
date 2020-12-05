@@ -18,22 +18,27 @@ GameTree::GameTree(){
     }
     //calls the createGameTree function
     createGameTree(head);
-    cout << g << endl;
+    // cout << g << endl;
+    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[0]->child[0]->space));
 }
 
 void GameTree::createGameTree(vertex* root){
+    //clean vector
     root->child.resize(0);
 
+    //create children of root
     for (int i = 0; i < (9 - root->distance); i++){
         vertex *n = new vertex(root->space, root->distance + 1, root);
         root->child.push_back(n);
         // g++;
     }
-    g++;
-    if(g < 100){
-        printVertex(root);
-        cout << endl;
-    }
+    // g++;
+    // if(g < 100){
+    //     printVertex(root);
+    //     cout << endl;
+    // }
+
+    //make the children of root unique
     popSpaces(root);
     // cout << "___\n";
     // for (int i = 0; i < root->child.size(); i++)
@@ -42,11 +47,14 @@ void GameTree::createGameTree(vertex* root){
     // }
     // int h;
     // cin >> h;
+
+    //avoids needlessness
     if(root->child.size() == 1){
         // g++;
         return;
     }
 
+    //calls this function again for recursion 
     for (int i = 0; i < root->child.size(); i++){
         createGameTree(root->child[i]);
     }
@@ -85,6 +93,7 @@ void GameTree::popSpaces(vertex* root){
     }
 }
 
+//prints a specific vertex
 void GameTree::printVertex(vertex* root){
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
@@ -100,6 +109,8 @@ void GameTree::printVertex(vertex* root){
     cout << endl;
 }
 
+//searches for a specific vertex
+//will likely be changed 
 vertex *GameTree::search(char a[3][3]){
     bool found;
     for (int i = 0; i < 3; i++){
@@ -114,7 +125,47 @@ vertex *GameTree::search(char a[3][3]){
         }
     }
     if(!found){
-        
+        for (int i = 0; i < head->child.size(); i++){
+            vertex *temp = searchHelper(a, head->child[i]);
+            if (temp != nullptr)
+            {
+                return temp;
+            }
+        }
+        return nullptr;
+    }
+    else
+    {
+        return head;
+    }
+}
+
+vertex *GameTree::searchHelper(char a[3][3], vertex* root){
+    bool found;
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            if(root->space[i][j] == a[i][j]){
+                found = true;
+            }else{
+                found = false;
+                i = 10;
+                j = 10;
+            }
+        }
+    }
+    if(!found){
+        for (int i = 0; i < root->child.size(); i++){
+            vertex *temp = searchHelper(a, root->child[i]);
+            if (temp != nullptr)
+            {
+                return temp;
+            }
+        }
+        return nullptr;
+    }
+    else
+    {
+        return root;
     }
 }
 

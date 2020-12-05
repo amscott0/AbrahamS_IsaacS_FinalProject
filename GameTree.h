@@ -6,7 +6,6 @@
 
 struct vertex{
     char space[3][3];
-    // int groupID = 0;
     vertex *parent = nullptr;
     bool visited;
     int distance;
@@ -35,33 +34,34 @@ class GameTree
     private:
         vertex* head;
         void popSpaces(vertex *root);
+        //I want to add all vertices to a vector
         //std::vector<vertex> vertices;
         void DFSLabel(std::string person, int ID);
-        vertex *searchHelper(char a[3][3]);
+        vertex *searchHelper(char a[3][3], vertex* root);
         void unvisit(vertex *root);
         void unvisitHelper(vertex *root);
         void createGameTree(vertex *root);
 };
 
-class Graph
-{
-    public:
-        Graph();  
-        ~Graph(); 
-        void addEdge(std::string v1, std::string v2, int weight);
-        void addVertex(std::string name);
-        int isAdjacent(std::string v1, std::string v2);
-        void displayEdges();
-        void assignGroupID();
-        void infectAndTrace();
-        void infectAndSpread(double rate);
+// class Graph
+// {
+//     public:
+//         Graph();  
+//         ~Graph(); 
+//         void addEdge(std::string v1, std::string v2, int weight);
+//         void addVertex(std::string name);
+//         int isAdjacent(std::string v1, std::string v2);
+//         void displayEdges();
+//         void assignGroupID();
+//         void infectAndTrace();
+//         void infectAndSpread(double rate);
         
-    protected:
-    private:
-        std::vector<vertex> vertices;
-        vertex *findVertex(std::string name);
-        void DFSLabel(std::string person, int ID);
-        void unvisit();
-};
+//     protected:
+//     private:
+//         std::vector<vertex> vertices;
+//         vertex *findVertex(std::string name);
+//         void DFSLabel(std::string person, int ID);
+//         void unvisit();
+// };
 
 #endif // GAMETREE_H
