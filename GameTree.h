@@ -29,6 +29,7 @@ class GameTree
     public:
         GameTree();
         void printVertex(vertex* root);
+        int miniMax(vertex *node, int depth, bool isMaxiMove);
 
     protected:
     private:
@@ -39,6 +40,8 @@ class GameTree
         void unvisit(vertex *root);
         void unvisitHelper(vertex *root);
         void createGameTree(vertex *root);
+        bool tieGame(vertex *node);
+        int evaluateMove(char board[3][3]);
 };
 
 class Graph
