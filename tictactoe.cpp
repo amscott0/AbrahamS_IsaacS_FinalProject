@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "tictactoe.h"
+#include "GameTree.h"
 using namespace std;
 
 void TicTacToe::playGame(){
@@ -19,7 +20,10 @@ void TicTacToe::playGame(){
     else if(choice == "Hard" || choice == "hard"){
         difficulty == "Hard";
     }
-    
+    else{
+        cout << "Difficulty not recognized, quitting" << endl;
+        return;
+    }
     while(!gameEnd){
         cout << "1. Input Move \n"
              << "2. Go Back A Move\n"
@@ -60,4 +64,40 @@ void TicTacToe::playGame(){
 }
 void TicTacToe::printBoard(){
 
+}
+vertex *TicTacToe::findBestMove(vertex* node, bool isPlayer){
+    GameTree myTree;
+    vertex *temp; //= myTree.search(node->space);
+    int bestMove = -100000;
+    int bestRow, bestCol, currentBest, depth;
+    char move;
+
+    if(isPlayer)
+        move = 'X';
+    else
+        move = 'O';
+
+    if(difficulty == "Easy")
+        depth = 1;
+    else if(difficulty == "Medium")
+        depth = 3;
+    else if (difficulty == "Hard")
+        depth = 9;
+    
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            if(node->space[i][j] == ' '){
+                temp->space[i][j] = move;
+                currentBest = myTree.miniMax(temp, depth, !isPlayer);
+                temp->space[i][j] = ' ';
+                if(currentBest > bestMove){
+                    bestCol = i;
+                    bestRow = j;
+                    bestMove = currentBest;
+                }
+            }
+        }
+    }
+    temp->space[bestCol][bestRow] = move;
+    return temp;
 }
