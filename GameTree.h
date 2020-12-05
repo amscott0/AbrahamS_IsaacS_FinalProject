@@ -29,6 +29,7 @@ class GameTree
     public:
         GameTree();
         void printVertex(vertex* root);
+        vertex *search(char a[3][3]);
 
     protected:
     private:
@@ -36,6 +37,7 @@ class GameTree
         void popSpaces(vertex *root);
         //std::vector<vertex> vertices;
         void DFSLabel(std::string person, int ID);
+        vertex *searchHelper(char a[3][3]);
         void unvisit(vertex *root);
         void unvisitHelper(vertex *root);
         void createGameTree(vertex *root);
