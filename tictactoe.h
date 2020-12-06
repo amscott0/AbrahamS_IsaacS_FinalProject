@@ -20,6 +20,8 @@ class TicTacToe
         vertex *head;
         std::string difficulty;
         bool gameEnd;
+        GameTree myTree;
+
 };
 
 #endif // TICTACTOE_H

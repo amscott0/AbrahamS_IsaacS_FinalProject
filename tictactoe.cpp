@@ -12,13 +12,13 @@ void TicTacToe::playGame(){
     string choice;
     cin >> choice;
     if(choice == "Easy" || choice == "easy"){
-        difficulty == "Easy";
+        difficulty = "Easy";
     }
     else if(choice == "Medium" || choice == "medium"){
-        difficulty == "Medium";
+        difficulty = "Medium";
     }
     else if(choice == "Hard" || choice == "hard"){
-        difficulty == "Hard";
+        difficulty = "Hard";
     }
     else{
         cout << "Difficulty not recognized, quitting" << endl;
@@ -34,7 +34,8 @@ void TicTacToe::playGame(){
         switch (decision) {
             case 1:
             {
-                //inputMove();
+                //inputMove(isPlayer);
+                //inputMove(!isPlayer);
                 break;
             }
             
@@ -62,12 +63,26 @@ void TicTacToe::playGame(){
     }
 
 }
+bool TicTacToe::inputMove(bool isPlayer){
+    cout << "Enter row and column" << endl;
+    
+}
 void TicTacToe::printBoard(){
-
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            cout << head->space[i][j] << "";
+            if(j%3 != 2){
+                cout << " | ";
+            }
+        }
+        if(i%3 != 2){
+            cout << endl << "--|---|--\n"; 
+        }
+    }
+    cout << endl;    
 }
 vertex *TicTacToe::findBestMove(vertex* node, bool isPlayer){
-    GameTree myTree;
-    vertex *temp; //= myTree.search(node->space);
+    vertex *temp = myTree.search(node->space);
     int bestMove = -100000;
     int bestRow, bestCol, currentBest, depth;
     char move;

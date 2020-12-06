@@ -6,14 +6,16 @@
 #include <fstream>
 #include <string>
 #include <vector>
-
+#include "GameTree.h"
+#include "tictactoe.h"
 using namespace std;
 
 
 // Main function run
 int main()
 {
-
+    //TicTacToe ttt;
+    GameTree tre;
 	std::string dmenu = "======Main Menu=====\n"
 					"1. Play Game\n"
 					"2. Place Holder\n"

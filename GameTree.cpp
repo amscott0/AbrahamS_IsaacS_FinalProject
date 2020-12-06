@@ -19,7 +19,7 @@ GameTree::GameTree(){
     //calls the createGameTree function
     createGameTree(head);
     // cout << g << endl;
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[0]->child[0]->space));
+    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->child[0]->space));
 }
 
 void GameTree::createGameTree(vertex* root){
@@ -253,7 +253,7 @@ int GameTree::evaluateMove(char board[3][3]){
     return 0;     
 }
 
-int main(){
-    GameTree test;
-    return 0;
-}
+// int main(){
+//     //GameTree test;
+//     //return 0;
+// }
