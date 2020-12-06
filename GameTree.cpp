@@ -18,7 +18,15 @@ GameTree::GameTree(){
     }
     //calls the createGameTree function
     createGameTree(head);
-    // cout << g << endl;
+    cout << g << endl;
+    printVertex(search(head->child[8]->space));
+    printVertex(search(head->child[8]->child[7]->space));
+    printVertex(search(head->child[8]->child[7]->child[6]->space));
+    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->space));
+    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->space));
+    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->space));
+    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->space));
+    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->space));
     printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->child[0]->space));
 }
 
@@ -50,7 +58,7 @@ void GameTree::createGameTree(vertex* root){
 
     //avoids needlessness
     if(root->child.size() == 1){
-        // g++;
+        g++;
         return;
     }
 
@@ -106,7 +114,7 @@ void GameTree::printVertex(vertex* root){
             cout << endl << "--|---|--\n"; 
         }
     }
-    cout << endl;
+    cout << endl << endl;
 }
 
 //searches for a specific vertex
