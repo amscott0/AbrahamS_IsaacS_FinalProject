@@ -101,3 +101,9 @@ vertex *TicTacToe::findBestMove(vertex* node, bool isPlayer){
     temp->space[bestCol][bestRow] = move;
     return temp;
 }
+
+void TicTacToe::printPossibleMoves(vertex *root){
+    for (int i = 0; i < root->child.size(); i++){
+        
+    }
+}

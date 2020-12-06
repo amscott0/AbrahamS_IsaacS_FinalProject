@@ -14,6 +14,7 @@ class TicTacToe
         void goBackMove();
         vertex *findBestMove(vertex *node, bool isPlayer);
         bool inputMove(bool isPlayer);
+        void printPossibleMoves(vertex *node);
 
     protected:
     private:

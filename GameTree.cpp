@@ -9,6 +9,7 @@ int g = 0;
 
 GameTree::GameTree(){
     //create the empty head of the graph
+    head = new vertex;
     head->distance = 0;
     head->visited = false;
     for (int i = 0; i < 3; i++){
@@ -19,15 +20,15 @@ GameTree::GameTree(){
     //calls the createGameTree function
     createGameTree(head);
     cout << g << endl;
-    printVertex(search(head->child[8]->space));
-    printVertex(search(head->child[8]->child[7]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->child[0]->space));
+    // printVertex(search(head->child[8]->space));
+    // printVertex(search(head->child[8]->child[7]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->child[0]->space));
 }
 
 void GameTree::createGameTree(vertex* root){

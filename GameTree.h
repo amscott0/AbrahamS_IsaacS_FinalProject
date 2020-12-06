@@ -39,8 +39,6 @@ class GameTree
         //std::vector<vertex> vertices;
         void DFSLabel(std::string person, int ID);
         vertex *searchHelper(char a[3][3], vertex* root);
-        void unvisit(vertex *root);
-        void unvisitHelper(vertex *root);
         void createGameTree(vertex *root);
         bool tieGame(vertex *node);
         int evaluateMove(char board[3][3]);
