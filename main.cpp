@@ -14,11 +14,11 @@ using namespace std;
 // Main function run
 int main()
 {
-    //TicTacToe ttt;
-    GameTree tre;
+    TicTacToe ttt;
+    
 	std::string dmenu = "======Main Menu=====\n"
 					"1. Play Game\n"
-					"2. Place Holder\n"
+					"2. Reset Game\n"
                     "3. Place Holder\n"
 					"4. Quit";
 
@@ -43,7 +43,7 @@ int main()
             
             case 2:
             {
-                
+                //ttt.resetGame()
                 break;
             }
             case 3:

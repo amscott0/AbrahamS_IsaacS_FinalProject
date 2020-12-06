@@ -9,18 +9,22 @@
 class TicTacToe
 {
     public:
+        TicTacToe(){
+            head = nullptr;
+        }
         void playGame();
+        void resetGame();
         void printBoard();
         void goBackMove();
         vertex *findBestMove(vertex *node, bool isPlayer);
-        bool inputMove(bool isPlayer);
-
+        int inputMove(bool isPlayer);
+        int isGameOver();
     protected:
     private:
-        vertex *head;
+        vertex *head; //first data structure
         std::string difficulty;
         bool gameEnd;
-        GameTree myTree;
+        GameTree myTree; //second data structure
 
 };
 

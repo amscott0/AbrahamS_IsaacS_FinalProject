@@ -63,9 +63,77 @@ void TicTacToe::playGame(){
     }
 
 }
-bool TicTacToe::inputMove(bool isPlayer){
-    cout << "Enter row and column" << endl;
-    
+int TicTacToe::inputMove(bool isPlayer){
+    if(isPlayer){
+        cout << "Enter row and column" << endl;
+        int row, col;
+        cin >> row >> col;        
+        //player move
+        if(head == nullptr){
+            head = new vertex;
+            head->parent = nullptr;
+            head->space[row][col] = 'X';
+            head->distance = 0;
+        }
+        else if(head->space[row][col] != ' '){
+            cout << "Inputted space already used" << endl;
+            return -1;
+        }
+        else{
+            vertex *newHead = new vertex(head->space, head->distance+1, head);
+            head->child.push_back(newHead);
+            newHead->space[row][col] = 'X';
+            head = newHead;
+        }
+    }
+    else{
+        //computer move
+        vertex *input = findBestMove(head, false);
+
+    }
+    return isGameOver();
+}
+int TicTacToe::isGameOver(){
+    //basically just a clone of evaluateMove()
+    char board[3][3];
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            board[i][j] = head->space[i][j];
+        }
+    }
+    //Checking for row win
+    for (int row = 0; row<3; row++) { 
+        if (board[row][0]==board[row][1] && board[row][1]==board[row][2]) { 
+            if (board[row][0]== 'X') 
+                return 10; 
+            else if (board[row][0]== 'O') 
+                return -10; 
+        } 
+    } 
+    // Checking for column win
+    for (int col = 0; col<3; col++) { 
+        if (board[0][col]==board[1][col] && board[1][col]==board[2][col]) { 
+            if (board[0][col]== 'X') 
+                return 10; 
+
+            else if (board[0][col]== 'O') 
+                return -10; 
+        } 
+    } 
+    // Checking for diagonal win
+    if (board[0][0]==board[1][1] && board[1][1]==board[2][2]) { 
+        if (board[0][0]== 'X') 
+            return 10; 
+        else if (board[0][0]== 'O') 
+            return -10; 
+    } 
+    if (board[0][2]==board[1][1] && board[1][1]==board[2][0]){ 
+        if (board[0][2]== 'X') 
+            return 10; 
+        else if (board[0][2]== 'O') 
+            return -10; 
+    }
+    return 0;
 }
 void TicTacToe::printBoard(){
     for (int i = 0; i < 3; i++){
@@ -87,32 +155,48 @@ vertex *TicTacToe::findBestMove(vertex* node, bool isPlayer){
     int bestRow, bestCol, currentBest, depth;
     char move;
 
-    if(isPlayer)
+    if(isPlayer){
         move = 'X';
-    else
-        move = 'O';
-
-    if(difficulty == "Easy")
-        depth = 1;
-    else if(difficulty == "Medium")
-        depth = 3;
-    else if (difficulty == "Hard")
         depth = 9;
-    
-    for(int i = 0; i < 3; i++){
-        for(int j = 0; j < 3; j++){
-            if(node->space[i][j] == ' '){
-                temp->space[i][j] = move;
-                currentBest = myTree.miniMax(temp, depth, !isPlayer);
-                temp->space[i][j] = ' ';
-                if(currentBest > bestMove){
-                    bestCol = i;
-                    bestRow = j;
-                    bestMove = currentBest;
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(node->space[i][j] == ' '){
+                    temp->space[i][j] = move;
+                    currentBest = myTree.miniMax(temp, depth, !isPlayer);
+                    temp->space[i][j] = ' ';
+                    if(currentBest > bestMove){
+                        bestCol = i;
+                        bestRow = j;
+                        bestMove = currentBest;
+                    }
+                }
+            }
+        }
+    }    
+    else{
+        move = 'O';
+        if(difficulty == "Easy")
+            depth = 1;
+        else if(difficulty == "Medium")
+            depth = 3;
+        else if (difficulty == "Hard")
+            depth = 9;
+
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(node->space[i][j] == ' '){
+                    temp->space[i][j] = move;
+                    currentBest = myTree.miniMax(temp, depth, !isPlayer);
+                    temp->space[i][j] = ' ';
+                    if(currentBest > bestMove){
+                        bestCol = i;
+                        bestRow = j;
+                        bestMove = currentBest;
+                    }
                 }
             }
         }
     }
-    temp->space[bestCol][bestRow] = move;
-    return temp;
+    node->space[bestCol][bestRow] = move;
+    return node;
 }

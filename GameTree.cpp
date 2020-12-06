@@ -9,6 +9,7 @@ int g = 0;
 
 GameTree::GameTree(){
     //create the empty head of the graph
+    head = new vertex;
     head->distance = 0;
     head->visited = false;
     for (int i = 0; i < 3; i++){
@@ -18,21 +19,21 @@ GameTree::GameTree(){
     }
     //calls the createGameTree function
     createGameTree(head);
-    cout << g << endl;
-    printVertex(search(head->child[8]->space));
-    printVertex(search(head->child[8]->child[7]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->space));
-    printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->child[0]->space));
+    // cout << g << endl;
+    // printVertex(search(head->child[8]->space));
+    // printVertex(search(head->child[8]->child[7]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->space));
+    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->child[0]->space));
 }
 
 void GameTree::createGameTree(vertex* root){
     //clean vector
-    root->child.resize(0);
+    root->child.clear();
 
     //create children of root
     for (int i = 0; i < (9 - root->distance); i++){
@@ -55,10 +56,10 @@ void GameTree::createGameTree(vertex* root){
     // }
     // int h;
     // cin >> h;
-
     //avoids needlessness
     if(root->child.size() == 1){
         g++;
+        //cout << g << endl;
         return;
     }
 
@@ -216,22 +217,17 @@ bool GameTree::tieGame(vertex *node){
 }
 int GameTree::evaluateMove(char board[3][3]){
     // Checking for row win
-    for (int row = 0; row<3; row++) 
-    { 
-        if (board[row][0]==board[row][1] && board[row][1]==board[row][2]) 
-        { 
+    for (int row = 0; row<3; row++) { 
+        if (board[row][0]==board[row][1] && board[row][1]==board[row][2]) { 
             if (board[row][0]== 'X') 
                 return 10; 
             else if (board[row][0]== 'O') 
                 return -10; 
         } 
     } 
-  
     // Checking for column win
-    for (int col = 0; col<3; col++) 
-    { 
-        if (board[0][col]==board[1][col] && board[1][col]==board[2][col]) 
-        { 
+    for (int col = 0; col<3; col++) { 
+        if (board[0][col]==board[1][col] && board[1][col]==board[2][col]) { 
             if (board[0][col]== 'X') 
                 return 10; 
   
@@ -239,18 +235,14 @@ int GameTree::evaluateMove(char board[3][3]){
                 return -10; 
         } 
     } 
-  
     // Checking for diagonal win
-    if (board[0][0]==board[1][1] && board[1][1]==board[2][2]) 
-    { 
+    if (board[0][0]==board[1][1] && board[1][1]==board[2][2]) { 
         if (board[0][0]== 'X') 
             return 10; 
         else if (board[0][0]== 'O') 
             return -10; 
     } 
-  
-    if (board[0][2]==board[1][1] && board[1][1]==board[2][0]) 
-    { 
+    if (board[0][2]==board[1][1] && board[1][1]==board[2][0]) { 
         if (board[0][2]== 'X') 
             return 10; 
         else if (board[0][2]== 'O') 
@@ -262,6 +254,6 @@ int GameTree::evaluateMove(char board[3][3]){
 }
 
 // int main(){
-//     //GameTree test;
-//     //return 0;
+//     GameTree test;
+//     return 0;
 // }
