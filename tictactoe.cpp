@@ -206,3 +206,25 @@ void TicTacToe::printPossibleMoves(vertex *root){
         myTree.printVertex(root->child[i]);
     }
 }
+
+void TicTacToe::goBackMove(){
+    vertex *temp = head;
+    head = head->parent;
+    delete temp;
+    head->child.clear();
+    temp = head;
+    head = head->parent;
+    delete temp;
+    head->child.clear();
+}
+
+void TicTacToe::resetGame(){
+    vertex *temp;
+    //SEGMENTATION FAULT POSSIBILITY HEEEEEEERRRRRRREEEEEEEE. If not plz delete.
+    while (head != nullptr){
+        temp = head;
+        head = head->parent;
+        delete temp;
+        head->child.clear();
+    }
+}
