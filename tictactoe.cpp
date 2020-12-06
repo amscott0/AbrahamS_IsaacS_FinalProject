@@ -270,3 +270,31 @@ string TicTacToe::findBestMove(vertex* node, bool isPlayer){
     string output = to_string(bestCol) + to_string(bestRow);
     return output;
 }
+
+void TicTacToe::printPossibleMoves(vertex *root){
+    for (int i = 0; i < root->child.size(); i++){
+        myTree.printVertex(root->child[i]);
+    }
+}
+
+void TicTacToe::goBackMove(){
+    vertex *temp = head;
+    head = head->parent;
+    delete temp;
+    head->child.clear();
+    temp = head;
+    head = head->parent;
+    delete temp;
+    head->child.clear();
+}
+
+void TicTacToe::resetGame(){
+    vertex *temp;
+    //SEGMENTATION FAULT POSSIBILITY HEEEEEEERRRRRRREEEEEEEE. If not plz delete.
+    while (head != nullptr){
+        temp = head;
+        head = head->parent;
+        delete temp;
+        head->child.clear();
+    }
+}

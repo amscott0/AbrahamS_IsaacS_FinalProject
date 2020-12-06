@@ -19,13 +19,14 @@ class TicTacToe
         std::string findBestMove(vertex *node, bool isPlayer);
         int inputMove(bool isPlayer);
         int isGameOver();
-        
+        void printPossibleMoves(vertex *node);
+
     protected:
     private:
-        vertex *head; //first data structure
+        vertex *head; //first data structure - linked list
         std::string difficulty;
         bool gameEnd;
-        GameTree myTree; //second data structure
+        GameTree myTree; //second data structure - graph like structure
 
 };
 
