@@ -180,10 +180,7 @@ vertex *GameTree::searchHelper(char a[3][3], vertex* root){
 int GameTree::miniMax(vertex *node, int depth, bool isMaxiMove){
     int moveScore;
     moveScore = evaluateMove(node->space);
-    if(depth == 0 || node->child.size() == 0){
-        return moveScore;
-    }
-    else if(moveScore == 10 || moveScore == -10){
+    if(depth == 0 || node->child.size() == 0 || moveScore == 10 || moveScore == -10){
         return moveScore;
     }
     else if(tieGame(node)){
@@ -199,7 +196,6 @@ int GameTree::miniMax(vertex *node, int depth, bool isMaxiMove){
     else{
         int smallestValue = 100000;
         for(int i = 0; i < node->child.size(); i++){
-            miniMax(node->child[i], depth-1, !isMaxiMove);
             smallestValue = min(smallestValue, miniMax(node->child[i], depth-1, !isMaxiMove));
         }
         return smallestValue;
@@ -248,7 +244,7 @@ int GameTree::evaluateMove(char board[3][3]){
         else if (board[0][2]== 'O') 
             return -10; 
     } 
-  
+
     // If there is no winner, return 0
     return 0;     
 }

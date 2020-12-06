@@ -37,7 +37,7 @@ int main()
         switch (choice) {
             case 1:
             {
-                //call tictactoe playGame() function
+                ttt.playGame();
                 break;
             }
             

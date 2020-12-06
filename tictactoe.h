@@ -16,9 +16,10 @@ class TicTacToe
         void resetGame();
         void printBoard();
         void goBackMove();
-        vertex *findBestMove(vertex *node, bool isPlayer);
+        std::string findBestMove(vertex *node, bool isPlayer);
         int inputMove(bool isPlayer);
         int isGameOver();
+        
     protected:
     private:
         vertex *head; //first data structure
