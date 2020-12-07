@@ -109,7 +109,7 @@ vertex *GameTree::search(char a[3][3]){
             }
         }
     }
-    //if it is not found, calls recursive function searchHelper on the head's children
+    //if it is not found, calls recursive function searchHelper on the head's children 
     if(!found){
         for (int i = 0; i < head->child.size(); i++){
             vertex *temp = searchHelper(a, head->child[i]);

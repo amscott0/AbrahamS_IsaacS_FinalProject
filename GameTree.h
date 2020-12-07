@@ -5,7 +5,7 @@
 #include<iostream>
 
 struct vertex{
-    char space[3][3]; //game board
+    char space[3][3]; //game board 
     vertex *parent = nullptr;
     bool visited;
     int distance;
