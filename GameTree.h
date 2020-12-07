@@ -5,7 +5,7 @@
 #include<iostream>
 
 struct vertex{
-    char space[3][3];
+    char space[3][3]; //game board
     vertex *parent = nullptr;
     bool visited;
     int distance;
@@ -28,9 +28,9 @@ class GameTree
     public:
         GameTree();
         void printVertex(vertex* root);
-        int miniMax(vertex *node, int depth, bool isMaxiMove);
-        vertex *search(char a[3][3]);
-
+        int miniMax(vertex *node, int depth, bool isMaxiMove); //most important function, finds the ideal move to make
+        vertex *search(char a[3][3]); 
+        vertex *getHead();
     protected:
     private:
         vertex* head;
@@ -41,7 +41,7 @@ class GameTree
         vertex *searchHelper(char a[3][3], vertex* root);
         void createGameTree(vertex *root);
         bool tieGame(vertex *node);
-        int evaluateMove(char board[3][3]);
+        int evaluateMove(char board[3][3]); //assigns a heuristic value to a game board state, integral to miniMax working
 };
 
 // class Graph

@@ -20,13 +20,17 @@ class TicTacToe
         int inputMove(bool isPlayer);
         int isGameOver();
         void printPossibleMoves(vertex *node);
-
+        void printAllMovesMade();
+        void changeDifficulty();
     protected:
     private:
-        vertex *head; //first data structure - linked list
+        vertex *head; //first data structure - linked list that holds all moves made
+                      //sort of a hybrid linked list, because the head moves forward and is
+                      //the current state of the board
         std::string difficulty;
         bool gameEnd;
-        GameTree myTree; //second data structure - graph like structure
+        GameTree myTree; //second data structure - graph like structure that holds every possible tictactoe
+                         //playthrough possibility
 
 };
 

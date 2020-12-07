@@ -179,13 +179,32 @@ vertex *GameTree::searchHelper(char a[3][3], vertex* root){
 }
 int GameTree::miniMax(vertex *node, int depth, bool isMaxiMove){
     int moveScore;
+    //calls evaluateMove on the board to determine the heuristic value
+    //in other words, it figures out if the current board is good for the player, good for the computer, or neither
     moveScore = evaluateMove(node->space);
+    //miniMax is a recursive function, the following is one of the conditions to end it
+
+    //depth is determined by the difficulty, when it gets to zero then no more children are checked
+    //harder difficulty means more possibilities checked
+
+    //if there are no more children then return the heuristic value
+    //if the board is a victory for the player (moveScore == 10) or a victory for the computer (moveScore == -10),
+    //then return the heuristic value
     if(depth == 0 || node->child.size() == 0 || moveScore == 10 || moveScore == -10){
-        return moveScore;
+        //this was supposed to fix the problem with the ai not going for the first available win
+        if(isMaxiMove){
+            //subtracted by the distance from the head of the tree in order to help the AI win quicker
+            return moveScore - node->distance;
+        }
+        else{
+            //added by the distance from the head of the tree in order to help the AI win quicker
+            return moveScore + node->distance;
+        }
     }
     else if(tieGame(node)){
         return 0;
     }
+    //if isMaxiMove is true, then we want to find the largest heuristic value out of all of the current node's children
     if(isMaxiMove){
         int largestValue = -100000;
         for(int i = 0; i < node->child.size(); i++){
@@ -193,6 +212,7 @@ int GameTree::miniMax(vertex *node, int depth, bool isMaxiMove){
         }
         return largestValue;
     }
+    //else we want to find the smallest heuristic value out of all of the current node's children
     else{
         int smallestValue = 100000;
         for(int i = 0; i < node->child.size(); i++){
@@ -202,6 +222,7 @@ int GameTree::miniMax(vertex *node, int depth, bool isMaxiMove){
     }
 }
 bool GameTree::tieGame(vertex *node){
+    //simply finds if the game is a tie
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
             if(node->space[i][j] == ' '){
@@ -215,8 +236,10 @@ int GameTree::evaluateMove(char board[3][3]){
     // Checking for row win
     for (int row = 0; row<3; row++) { 
         if (board[row][0]==board[row][1] && board[row][1]==board[row][2]) { 
-            if (board[row][0]== 'X') 
+            //assign a value of 10 if X wins, because the player is the maximizer
+            if (board[row][0]== 'X')
                 return 10; 
+            //vice versa, the computer is the minimizer
             else if (board[row][0]== 'O') 
                 return -10; 
         } 
@@ -248,7 +271,9 @@ int GameTree::evaluateMove(char board[3][3]){
     // If there is no winner, return 0
     return 0;     
 }
-
+vertex * GameTree::getHead(){
+    return head;
+}
 // int main(){
 //     GameTree test;
 //     return 0;

@@ -19,8 +19,7 @@ int main()
 	std::string dmenu = "======Main Menu=====\n"
 					"1. Play Game\n"
 					"2. Reset Game\n"
-                    "3. Place Holder\n"
-					"4. Quit";
+					"3. Quit";
 
     int choice;
 
@@ -43,20 +42,19 @@ int main()
             
             case 2:
             {
-                //ttt.resetGame()
+                ttt.resetGame();
                 break;
             }
             case 3:
             {
-
-                break;
-            }
-                
-            case 4:
-            {
                 exit = true;
                 break;
             }
+                
+            // case 4:
+            // {
+            //     break;
+            // }
         }
         
         if (exit) {
