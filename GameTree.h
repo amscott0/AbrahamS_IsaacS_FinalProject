@@ -35,34 +35,11 @@ class GameTree
     private:
         vertex* head;
         void popSpaces(vertex *root);
-        //I want to add all vertices to a vector
-        //std::vector<vertex> vertices;
         void DFSLabel(std::string person, int ID);
         vertex *searchHelper(char a[3][3], vertex* root);
         void createGameTree(vertex *root);
         bool tieGame(vertex *node);
         int evaluateMove(char board[3][3]); //assigns a heuristic value to a game board state, integral to miniMax working
 };
-
-// class Graph
-// {
-//     public:
-//         Graph();  
-//         ~Graph(); 
-//         void addEdge(std::string v1, std::string v2, int weight);
-//         void addVertex(std::string name);
-//         int isAdjacent(std::string v1, std::string v2);
-//         void displayEdges();
-//         void assignGroupID();
-//         void infectAndTrace();
-//         void infectAndSpread(double rate);
-        
-//     protected:
-//     private:
-//         std::vector<vertex> vertices;
-//         vertex *findVertex(std::string name);
-//         void DFSLabel(std::string person, int ID);
-//         void unvisit();
-// };
 
 #endif // GAMETREE_H

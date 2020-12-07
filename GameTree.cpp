@@ -19,16 +19,6 @@ GameTree::GameTree(){
     }
     //calls the createGameTree function
     createGameTree(head);
-    // cout << g << endl;
-    // printVertex(search(head->child[8]->space));
-    // printVertex(search(head->child[8]->child[7]->space));
-    // printVertex(search(head->child[8]->child[7]->child[6]->space));
-    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->space));
-    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->space));
-    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->space));
-    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->space));
-    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->space));
-    // printVertex(search(head->child[8]->child[7]->child[6]->child[5]->child[4]->child[3]->child[2]->child[1]->child[0]->space));
 }
 
 void GameTree::createGameTree(vertex* root){
@@ -39,27 +29,13 @@ void GameTree::createGameTree(vertex* root){
     for (int i = 0; i < (9 - root->distance); i++){
         vertex *n = new vertex(root->space, root->distance + 1, root);
         root->child.push_back(n);
-        // g++;
     }
-    // g++;
-    // if(g < 100){
-    //     printVertex(root);
-    //     cout << endl;
-    // }
 
     //make the children of root unique
     popSpaces(root);
-    // cout << "___\n";
-    // for (int i = 0; i < root->child.size(); i++)
-    // {
-    //     printVertex(root->child[i]);
-    // }
-    // int h;
-    // cin >> h;
+
     //avoids needlessness
     if(root->child.size() == 1){
-        g++;
-        //cout << g << endl;
         return;
     }
 
@@ -102,7 +78,7 @@ void GameTree::popSpaces(vertex* root){
     }
 }
 
-//prints a specific vertex
+//prints a specific vertex in a neat fashion
 void GameTree::printVertex(vertex* root){
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
@@ -119,9 +95,9 @@ void GameTree::printVertex(vertex* root){
 }
 
 //searches for a specific vertex
-//will likely be changed 
 vertex *GameTree::search(char a[3][3]){
     bool found;
+    //compares given array and the head's array
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
             if(head->space[i][j] == a[i][j]){
@@ -133,6 +109,7 @@ vertex *GameTree::search(char a[3][3]){
             }
         }
     }
+    //if it is not found, calls recursive function searchHelper on the head's children
     if(!found){
         for (int i = 0; i < head->child.size(); i++){
             vertex *temp = searchHelper(a, head->child[i]);
@@ -151,6 +128,7 @@ vertex *GameTree::search(char a[3][3]){
 
 vertex *GameTree::searchHelper(char a[3][3], vertex* root){
     bool found;
+    //compares given array and the root's array
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
             if(root->space[i][j] == a[i][j]){
@@ -162,6 +140,7 @@ vertex *GameTree::searchHelper(char a[3][3], vertex* root){
             }
         }
     }
+    //if it was not found, calls searchHelper with root's children
     if(!found){
         for (int i = 0; i < root->child.size(); i++){
             vertex *temp = searchHelper(a, root->child[i]);
@@ -274,7 +253,3 @@ int GameTree::evaluateMove(char board[3][3]){
 vertex * GameTree::getHead(){
     return head;
 }
-// int main(){
-//     GameTree test;
-//     return 0;
-// }
