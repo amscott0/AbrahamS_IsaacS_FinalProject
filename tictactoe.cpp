@@ -46,8 +46,9 @@ void TicTacToe::playGame(){
                 //player wins
                 if(move1 == 10){
                     cout << "You won!" << endl;
-                    
+                    printBoard();
                     gameEnd = true;
+                    return;
                 }
                 //move was invalid
                 else if(move1 == -2){
@@ -56,7 +57,9 @@ void TicTacToe::playGame(){
                 //tie game, game over
                 else if(move1 == -1){
                     cout << "Tie game! Game over!" << endl;
+                    printBoard();
                     gameEnd = true;
+                    return;
                 }
 
                 //second call for computer
@@ -64,15 +67,18 @@ void TicTacToe::playGame(){
                 //computer wins
                 if(move2 == -10){
                     cout  << "You lost! Better luck next time!" << endl;
-                    
+                    printBoard();
                     gameEnd = true;
+                    return;
                 }
                 //tie game
                 else if(move2 == -1){
                     cout << "Tie game! Game over!" << endl;
+                    printBoard();
                     gameEnd = true;
+                    return;
                 }
-                printBoard();
+                
                 break;
             }
             
