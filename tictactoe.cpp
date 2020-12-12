@@ -376,6 +376,10 @@ void TicTacToe::goBackMove(){
 
 void TicTacToe::resetGame(){
     //resets variables and deletes LL
+    if(head == nullptr){
+        cout << "Game already set to play again" << endl;
+        return;
+    }
     vertex *temp;
     while (head->parent != nullptr){
         temp = head;
