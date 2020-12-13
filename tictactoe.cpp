@@ -78,7 +78,7 @@ void TicTacToe::playGame(){
                     gameEnd = true;
                     return;
                 }
-                
+                printBoard();
                 break;
             }
             
@@ -125,14 +125,35 @@ void TicTacToe::playGame(){
 int TicTacToe::inputMove(bool isPlayer){
     //check if function is called for player or computer
     if(isPlayer){
-        cout << "Enter column followed by row" << endl;
         int row, col;
-        cin >> col >> row;
+        bool error;
+        //following do while loop largely taken from http://www.cplusplus.com/forum/beginner/136073/
+        do{
+            error = false;//Flag false, safe
+            cout << "Enter column followed by row" << endl;
+            cin >> col >> row;
+            if(cin.fail()){
+                error = true;//Flag true, error has occurred
+                cout<<"Error, invalid entry.\n\n";
+            }
+
+            cin.clear(); //Clears any error flags
+            cin.ignore(1000,'\n'); //Ignores 1000 characters, or until '\n'
+
+        }while(error);        
+        
         row--;
-        col--;        
+        col--;   
+
         //player move
+
+        //firstly, check that the player inputted a row or column outside of 1-3
+        if(row > 2 || col > 2 || col < 0 || row < 0){
+            cout << "Inputted row or column not valid!" << endl;
+            return -2;
+        }
         //linked list is empty, beginning of game
-        if(head == nullptr){
+        else if(head == nullptr){
             head = new vertex;
             for (int i = 0; i < 3; i++){
                 for (int j = 0; j < 3; j++){
@@ -147,12 +168,7 @@ int TicTacToe::inputMove(bool isPlayer){
         else if(head->space[row][col] != ' '){
             cout << "Inputted space already used!" << endl;
             return -2;
-        }
-        //else the player inputted a row or column outside of 1-3
-        else if(row > 2 || col > 2 || col < 0 || row < 0){
-            cout << "Inputted row or column not valid!" << endl;
-            return -2;
-        }
+        }        
         //base case
         else{
             vertex *newHead = new vertex(head->space, head->distance+1, head);
